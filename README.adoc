@@ -1,0 +1,7 @@
+= Camunda Day 1 Lab
+SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
+ifdef::env-github[:USER: SMARTRACTECHNOLOGY]
+ifdef::env-github[:REPO: camunda-spring-boot]
+ifdef::env-github[:BRANCH: master]
+
+This is just our day one lab in Spring Boot instead of Wildfly.

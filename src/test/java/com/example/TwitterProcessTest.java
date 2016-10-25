@@ -3,17 +3,16 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -24,6 +23,7 @@ import static org.junit.Assert.*;
  * Tests the twitter approval process.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("test")
 @SpringApplicationConfiguration(classes = CamundaSpringBootApplication.class)
 public class TwitterProcessTest {
 
@@ -47,7 +47,7 @@ public class TwitterProcessTest {
     @Test
     public void testProcessing() {
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("approved", true);
         map.put("content", "I am a teapot.");
 
@@ -59,9 +59,11 @@ public class TwitterProcessTest {
         // Not working in Spring Context right now.
         // ProcessTestCoverage.calculate(processInstance,processEngine);
 
-        ProcessEngineAssertions.assertThat(processInstance).isEnded();
+        ProcessEngineAssertions.assertThat(processInstance)
+            .isEnded();
 
-        assertThat(runtimeService.createProcessInstanceQuery().count(), is(0L));
+        assertThat(runtimeService.createProcessInstanceQuery()
+                       .count(), is(0L));
 
     }
 }

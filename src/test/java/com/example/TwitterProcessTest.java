@@ -49,6 +49,7 @@ public class TwitterProcessTest {
 
         Map<String,Object> map = new HashMap<>();
         map.put("approved", true);
+        map.put("content", "I am a teapot.");
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("twitter-blocker", map);
 

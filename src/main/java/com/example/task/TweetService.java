@@ -16,7 +16,7 @@ public class TweetService implements JavaDelegate {
     private final Logger LOGGER = LoggerFactory.getLogger(TweetService.class.getName());
 
     public void execute(DelegateExecution execution) throws Exception {
-        String content = "I did it! Cheers Spring Boot Component";
+        final String content = execution.getVariable("content").toString();
 
         LOGGER.info("Publishing tweet: " + content);
 
